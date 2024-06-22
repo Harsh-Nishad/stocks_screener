@@ -1,0 +1,271 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load js %}
+
+{% block content %}
+<div class="container-fluid py-4 px-4">
+
+    <div class="row justify-content-center mb-3 mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body container-fluid">
+                    <h5 class="card-title text-center mb-4">{{ stock.symbol }}</h5>
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Market Cap</p>
+                                                <h5 class="font-weight-bolder mb-0">
+                                                    {{ stock.company_ratios.market_cap }}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Current Price</p>
+                                                <h5 class="font-weight-bolder mb-0">
+                                                    {{ stock.company_ratios.current_price}}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Book Value</p>
+                                                <h5 class="font-weight-bolder mb-0">
+                                                    {{ stock.company_ratios.book_value}}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                                <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Dividend Yield</p>
+                                                <h5 class="font-weight-bolder mb-0">
+                                                    {{ stock.company_ratios.dividend_yield}}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-12 h-50 mh-50">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Stock Graph</h5>
+                    <div class="dropdown">
+                        <button class="btn bg-gradient-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Price
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <li><a class="dropdown-item" href="#" data-graph="Price">Price</a></li>
+                            <li><a class="dropdown-item" href="#" data-graph="DMA50">50 DMA</a></li>
+                            <li><a class="dropdown-item" href="#" data-graph="DMA200">200 DMA</a></li>
+                            <li><a class="dropdown-item" href="#" data-graph="Volume">Volume</a></li>
+                        </ul>
+                      </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="stock-chart" class="chart-canvas h-75"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Peer comparison -->
+    <div class="row justify-content-center mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Peer Comparison</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">S.No.</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CMP Rs.</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">P/E</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Market Cap Rs.Cr.</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Div Yld %</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NP Qtr Rs.Cr.</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtr Profit Var %</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sales Qtr Rs.Cr.</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtr Sales Var %</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ROCE %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for peer in stock.peers %}
+                            <tr>
+                                <td>{{ peer.s_no }}</td>
+                                <td>{{ peer.name }}</td>
+                                <td class="text-center">{{ peer.cmp_rs }}</td>
+                                <td class="text-center">{{ peer.p_e }}</td>
+                                <td class="text-center">{{ peer.mar_cap_rs_cr }}</td>
+                                <td class="text-center">{{ peer.div_yld_percent }}</td>
+                                <td class="text-center">{{ peer.np_qtr_rs_cr }}</td>
+                                <td class="text-center">{{ peer.qtr_profit_var_percent }}</td>
+                                <td class="text-center">{{ peer.sales_qtr_rs_cr }}</td>
+                                <td class="text-center">{{ peer.qtr_sales_var_percent }}</td>
+                                <td class="text-center">{{ peer.roce_percent }}</td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card 3</h5>
+                    <p class="card-text">Content for card 3.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card 4</h5>
+                    <p class="card-text">Content for card 4.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card 5</h5>
+                    <p class="card-text">Content for card 5.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card 6</h5>
+                    <p class="card-text">Content for card 6.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card 7</h5>
+                    <p class="card-text">Content for card 7.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card 8</h5>
+                    <p class="card-text">Content for card 8.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card 9</h5>
+                    <p class="card-text">Content for card 9.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Card 10</h5>
+                    <p class="card-text">Content for card 10.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extrascript %}
+<!-- Load Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Load Chart.js and date adapter -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+<!-- Load custom JavaScript -->
+<script src="{% static 'js/stock-charts.js' %}"></script>
+
+<script type="text/javascript">
+    // Pass stock data to the separate JS file
+    var stockData = {{ stock|js }};
+</script>
+{% endblock extrascript %}
