@@ -69,6 +69,7 @@ class Scraper:
         tabluar_data['peers'] = [ self.clean_keys(peer_data) for peer_data in json.loads(self.get_peers_data(soup)) ]
         tabluar_data['company_ratios'] = self.clean_keys(self.get_company_ratios(soup))
         tabluar_data['company_documents'] = self.get_company_documents(soup)
+        tabluar_data['stock_details'] = self.stock_details(soup)
 
         list_of_graphs_tables = self.get_graph_data(soup)
 
@@ -286,3 +287,32 @@ class Scraper:
         except Exception as e:
             print(f"error {e} in get_company_documents")
             return None
+        
+    def stock_details(self,soup):
+        try:
+            div = soup.find('div', class_='company-links')
+            data = {}
+            for a in div.find_all('a'):
+                data[a.text] = a['href']
+            data = {k.strip().replace('\n', '').replace('  ', ' '): v.strip().replace('\n', '').replace('  ', ' ') for k, v in data.items()}
+            h1 = soup.find('h1', class_='margin-0 show-from-tablet-landscape')
+            data['company_name'] = h1.text
+            final_data = {}
+            for key, value in data.items():
+                if 'BSE' in key:
+                    bse_id = key.split(' ')[-1]
+                    final_data['bse_id'] = bse_id
+                    final_data['bse_url'] = value
+                elif 'NSE' in key:
+                    nse_id = key.split(' ')[-1]
+                    final_data['nse_id'] = nse_id
+                    final_data['nse_url'] = value
+                elif '.com' in key or '.in' in key:
+                    final_data['website'] = value
+                else:
+                    final_data[key] = value
+            return final_data
+
+        except Exception as e:
+            print("Error in stock_details", e)
+            return {}

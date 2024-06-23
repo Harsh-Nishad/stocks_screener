@@ -3,128 +3,190 @@
 {% load js %}
 
 {% block content %}
-<div class="container-fluid py-4 px-4">
-
+<div class="container-fluid py-4 px-8">
     <div class="row justify-content-center mb-3 mt-3">
         <div class="col-12">
             <div class="card">
                 <div class="card-body container-fluid">
                     <h5 class="card-title text-center mb-4">{{ stock.symbol }}</h5>
-                    <div class="row">
-                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="row container-fluid">
+                        <!-- Company Details Column -->
+                        <div class="col-xl-6 mb-xl-0 mb-4">
                             <div class="card">
                                 <div class="card-body p-3">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <div class="numbers">
-                                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Market Cap</p>
-                                                <h5 class="font-weight-bolder mb-0">
-                                                    {{ stock.company_ratios.market_cap }}
-                                                </h5>
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                                <i class="ni ni-building text-lg opacity-10" aria-hidden="true"></i>
                                             </div>
                                         </div>
-                                        <div class="col-4 text-end">
-                                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                        <div class="col">
+                                            <p class="text-sm mb-1 text-capitalize font-weight-bold">Company Name</p>
+                                            <h5 class="font-weight-bolder mb-0">{{ stock.stock_details.company_name }}</h5>
+                                        </div>
+                                    </div>
+                                    <hr class="horizontal dark my-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                                <i class="ni ni-chart-bar-32 text-lg opacity-10" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <p class="text-sm mb-1 text-capitalize font-weight-bold">BSE ID</p>
+                                            <h5 class="font-weight-bolder mb-0">{{ stock.stock_details.bse_id }}</h5>
+                                            <a href="{{ stock.stock_details.bse_url }}" target="_blank" class="text-decoration-none">View on BSE</a>
+                                        </div>
+                                    </div>
+                                    <hr class="horizontal dark my-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                                <i class="ni ni-chart-pie-35 text-lg opacity-10" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <p class="text-sm mb-1 text-capitalize font-weight-bold">NSE ID</p>
+                                            <h5 class="font-weight-bolder mb-0">{{ stock.stock_details.nse_id }}</h5>
+                                            <a href="{{ stock.stock_details.nse_url }}" target="_blank" class="text-decoration-none">View on NSE</a>
+                                        </div>
+                                    </div>
+                                    <hr class="horizontal dark my-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                                <i class="ni ni-spaceship text-lg opacity-10" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <p class="text-sm mb-1 text-capitalize font-weight-bold">Website</p>
+                                            <a href="{{ stock.stock_details.website }}" target="_blank" class="text-decoration-none">{{ stock.stock_details.website }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Financial Metrics Columns (Market Cap, Current Price, Book Value, Dividend Yield) -->
+                        <div class="col-xl-6">
+                            <div class="row">
+                                <!-- Market Cap Column -->
+                                <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="numbers">
+                                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Market Cap</p>
+                                                        <h5 class="font-weight-bolder mb-0">{{ stock.company_ratios.market_cap }}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 text-end">
+                                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- Current Price Column -->
+                                <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="numbers">
+                                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Current Price</p>
+                                                        <h5 class="font-weight-bolder mb-0">{{ stock.company_ratios.current_price }}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 text-end">
+                                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                                        <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- Book Value Column -->
+                                <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="numbers">
+                                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Book Value</p>
+                                                        <h5 class="font-weight-bolder mb-0">{{ stock.company_ratios.book_value }}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 text-end">
+                                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                                        <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- Dividend Yield Column -->
+                                <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="numbers">
+                                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Dividend Yield</p>
+                                                        <h5 class="font-weight-bolder mb-0">{{ stock.company_ratios.dividend_yield }}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 text-end">
+                                                    <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                                        <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                            <div class="card">
-                                <div class="card-body p-3">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <div class="numbers">
-                                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Current Price</p>
-                                                <h5 class="font-weight-bolder mb-0">
-                                                    {{ stock.company_ratios.current_price}}
-                                                </h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-4 text-end">
-                                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                            <div class="card">
-                                <div class="card-body p-3">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <div class="numbers">
-                                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Book Value</p>
-                                                <h5 class="font-weight-bolder mb-0">
-                                                    {{ stock.company_ratios.book_value}}
-                                                </h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-4 text-end">
-                                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                                <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="card">
-                                <div class="card-body p-3">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <div class="numbers">
-                                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Dividend Yield</p>
-                                                <h5 class="font-weight-bolder mb-0">
-                                                    {{ stock.company_ratios.dividend_yield}}
-                                                </h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-4 text-end">
-                                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
+    
     <div class="row justify-content-center mb-3">
-        <div class="col-12 h-50 mh-50">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0">Stock Graph</h5>
                     <div class="dropdown">
-                        <button class="btn bg-gradient-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             Price
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <li><a class="dropdown-item" href="#" data-graph="Price">Price</a></li>
+                            <li><a class="dropdown-item" href="#" data-graph="Price">Price</a></li>
                             <li><a class="dropdown-item" href="#" data-graph="DMA50">50 DMA</a></li>
                             <li><a class="dropdown-item" href="#" data-graph="DMA200">200 DMA</a></li>
                             <li><a class="dropdown-item" href="#" data-graph="Volume">Volume</a></li>
                         </ul>
-                      </div>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <canvas id="stock-chart" class="chart-canvas h-75"></canvas>
+                    <canvas id="stock-chart" class="chart-canvas p-4" style="max-height: 40vh;"></canvas>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <!-- Peer comparison -->
     <div class="row justify-content-center mb-3">
         <div class="col-12">
@@ -152,7 +214,11 @@
                         <tbody>
                             {% for peer in stock.peers %}
                             <tr>
+                                {% if peer.s_no %}
                                 <td>{{ peer.s_no }}</td>
+                                {% else %}
+                                <td></td>
+                                {% endif %}
                                 <td>{{ peer.name }}</td>
                                 <td class="text-center">{{ peer.cmp_rs }}</td>
                                 <td class="text-center">{{ peer.p_e }}</td>
@@ -163,17 +229,198 @@
                                 <td class="text-center">{{ peer.sales_qtr_rs_cr }}</td>
                                 <td class="text-center">{{ peer.qtr_sales_var_percent }}</td>
                                 <td class="text-center">{{ peer.roce_percent }}</td>
-
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
-            
-            
         </div>
     </div>
+
+    <!--quarterly results-->
+    <div class="row justify-content-center mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Quarterly Results</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                {% for quarter in stock.quarters %}
+                                    {% for key, value in quarter.items %}
+                                    {% if key != 'Unnamed: 0'%}
+                                        <th>{{ key }}</th>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for quarter in stock.quarters %}
+                                <tr>
+                                    {% for key, value in quarter.items %}
+                                        <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--profit and loss-->
+    <div class="row justify-content-center mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Profit and Loss</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                {% for p_l in stock.profit_loss %}
+                                   {% for key, value in p_l.items %}
+                                    {% if key != 'Unnamed: 0'%}
+                                        <th>{{ key }}</th>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p_l in stock.profit_loss %}
+                                <tr>
+                                    {% for key, value in p_l.items %}
+                                        <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--balance sheet-->
+    <div class="row justify-content-center mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Balance Sheet</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                {% for balance in stock.balance_sheet %}
+                                    {% for key, value in balance.items %}
+                                    {% if key != 'Unnamed: 0'%}
+                                        <th>{{ key }}</th>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for balance in stock.balance_sheet %}
+                                <tr>
+                                    {% for key, value in balance.items %}
+                                        <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--cash flow-->
+    <div class="row justify-content-center mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Cash Flow</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                {% for cash in stock.cash_flow %}
+                                    {% for key, value in cash.items %}
+                                    {% if key != 'Unnamed: 0'%}
+                                        <th>{{ key }}</th>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cash in stock.cash_flow %}
+                                <tr>
+                                    {% for key, value in cash.items %}
+                                        <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--ratios-->
+    <div class="row justify-content-center mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Ratios</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                {% for ratio in stock.ratios %}
+                                    {% for key, value in ratio.items %}
+                                    {% if key != 'Unnamed: 0'%}
+                                        <th>{{ key }}</th>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ratio in stock.ratios %}
+                                <tr>
+                                    {% for key, value in ratio.items %}
+                                        <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+
 
 
     <div class="row justify-content-center mb-3">
