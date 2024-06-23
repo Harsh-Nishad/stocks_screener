@@ -8,10 +8,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body container-fluid">
-                    <h5 class="card-title text-center mb-4">{{ stock.symbol }}</h5>
-                    <div class="row container-fluid">
+                    <h5 class="card-title text-center ">{{ stock.symbol }}</h5>
+                    <div class="row">
                         <!-- Company Details Column -->
-                        <div class="col-xl-6 mb-xl-0 mb-4">
+                        <div class="col-xl-6 mb-xl-0 ">
                             <div class="card">
                                 <div class="card-body p-3">
                                     <div class="row align-items-center">
@@ -70,11 +70,11 @@
                         <!-- Financial Metrics Columns (Market Cap, Current Price, Book Value, Dividend Yield) -->
                         <div class="col-xl-6">
                             <div class="row">
-                                <!-- Market Cap Column -->
-                                <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+                                <!-- Market Cap -->
+                                <div class="col-12 ">
                                     <div class="card">
                                         <div class="card-body p-3">
-                                            <div class="row">
+                                            <div class="row align-items-center">
                                                 <div class="col-8">
                                                     <div class="numbers">
                                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Market Cap</p>
@@ -91,11 +91,11 @@
                                     </div>
                                 </div>
                         
-                                <!-- Current Price Column -->
-                                <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+                                <!-- Current Price -->
+                                <div class="col-12 ">
                                     <div class="card">
                                         <div class="card-body p-3">
-                                            <div class="row">
+                                            <div class="row align-items-center">
                                                 <div class="col-8">
                                                     <div class="numbers">
                                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Current Price</p>
@@ -112,11 +112,11 @@
                                     </div>
                                 </div>
                         
-                                <!-- Book Value Column -->
-                                <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+                                <!-- Book Value -->
+                                <div class="col-12 ">
                                     <div class="card">
                                         <div class="card-body p-3">
-                                            <div class="row">
+                                            <div class="row align-items-center">
                                                 <div class="col-8">
                                                     <div class="numbers">
                                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Book Value</p>
@@ -133,11 +133,11 @@
                                     </div>
                                 </div>
                         
-                                <!-- Dividend Yield Column -->
-                                <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+                                <!-- Dividend Yield -->
+                                <div class="col-12">
                                     <div class="card">
                                         <div class="card-body p-3">
-                                            <div class="row">
+                                            <div class="row align-items-center">
                                                 <div class="col-8">
                                                     <div class="numbers">
                                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Dividend Yield</p>
@@ -155,6 +155,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         
                     </div>
                 </div>
@@ -198,7 +199,7 @@
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">S.No.</th>
+                                {% comment %} <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">S.No.</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CMP Rs.</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">P/E</th>
@@ -208,17 +209,29 @@
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtr Profit Var %</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sales Qtr Rs.Cr.</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtr Sales Var %</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ROCE %</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ROCE %</th> {% endcomment %}
+                                <th>S.No.</th>
+                                <th>Name</th>
+                                <th class="text-center">CMP Rs.</th>
+                                <th class="text-center">P/E</th>
+                                <th class="text-center">Market Cap Rs.Cr.</th>
+                                <th class="text-center">Div Yld %</th>
+                                <th class="text-center">NP Qtr Rs.Cr.</th>
+                                <th class="text-center">Qtr Profit Var %</th>
+                                <th class="text-center">Sales Qtr Rs.Cr.</th>
+                                <th class="text-center">Qtr Sales Var %</th>
+                                <th class="text-center">ROCE %</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             {% for peer in stock.peers %}
                             <tr>
-                                {% if peer.s_no %}
+                                {% comment %} {% if peer.s_no %}
                                 <td>{{ peer.s_no }}</td>
                                 {% else %}
-                                <td></td>
-                                {% endif %}
+                                <td></td> {% endcomment %}
+                                {% comment %} {% endif %}
                                 <td>{{ peer.name }}</td>
                                 <td class="text-center">{{ peer.cmp_rs }}</td>
                                 <td class="text-center">{{ peer.p_e }}</td>
@@ -228,7 +241,15 @@
                                 <td class="text-center">{{ peer.qtr_profit_var_percent }}</td>
                                 <td class="text-center">{{ peer.sales_qtr_rs_cr }}</td>
                                 <td class="text-center">{{ peer.qtr_sales_var_percent }}</td>
-                                <td class="text-center">{{ peer.roce_percent }}</td>
+                                <td class="text-center">{{ peer.roce_percent }}</td> {% endcomment %}
+                                {% for key, value in peer %}
+                                 {% if value %}
+                                    <td>{{ value }}</td>
+                                {% else %}
+                                    <td></td>
+                                    {% endif %}
+                                {% endfor %}
+
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -250,8 +271,8 @@
                         <thead>
                             <tr>
                                 <th>Category</th>
-                                {% for quarter in stock.quarters %}
-                                    {% for key, value in quarter.items %}
+                                {% for quarter in stock.quarters|slice:":1" %}
+                                    {% for key,value in quarter%}
                                     {% if key != 'Unnamed: 0'%}
                                         <th>{{ key }}</th>
                                         {% endif %}
@@ -262,7 +283,7 @@
                         <tbody>
                             {% for quarter in stock.quarters %}
                                 <tr>
-                                    {% for key, value in quarter.items %}
+                                    {% for key, value in quarter%}
                                         <td>{{ value }}</td>
                                     {% endfor %}
                                 </tr>
@@ -286,8 +307,8 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                {% for p_l in stock.profit_loss %}
-                                   {% for key, value in p_l.items %}
+                                {% for p_l in stock.profit_loss|slice:":1" %}
+                                   {% for key, value in p_l %}
                                     {% if key != 'Unnamed: 0'%}
                                         <th>{{ key }}</th>
                                     {% endif %}
@@ -298,7 +319,7 @@
                         <tbody>
                             {% for p_l in stock.profit_loss %}
                                 <tr>
-                                    {% for key, value in p_l.items %}
+                                    {% for key, value in p_l %}
                                         <td>{{ value }}</td>
                                     {% endfor %}
                                 </tr>
@@ -322,8 +343,8 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                {% for balance in stock.balance_sheet %}
-                                    {% for key, value in balance.items %}
+                                {% for balance in stock.balance_sheet|slice:":1" %}
+                                    {% for key, value in balance %}
                                     {% if key != 'Unnamed: 0'%}
                                         <th>{{ key }}</th>
                                     {% endif %}
@@ -334,7 +355,7 @@
                         <tbody>
                             {% for balance in stock.balance_sheet %}
                                 <tr>
-                                    {% for key, value in balance.items %}
+                                    {% for key, value in balance %}
                                         <td>{{ value }}</td>
                                     {% endfor %}
                                 </tr>
@@ -358,8 +379,8 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                {% for cash in stock.cash_flow %}
-                                    {% for key, value in cash.items %}
+                                {% for cash in stock.cash_flow|slice:"1" %}
+                                    {% for key, value in cash %}
                                     {% if key != 'Unnamed: 0'%}
                                         <th>{{ key }}</th>
                                     {% endif %}
@@ -370,7 +391,7 @@
                         <tbody>
                             {% for cash in stock.cash_flow %}
                                 <tr>
-                                    {% for key, value in cash.items %}
+                                    {% for key, value in cash %}
                                         <td>{{ value }}</td>
                                     {% endfor %}
                                 </tr>
@@ -394,8 +415,8 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                {% for ratio in stock.ratios %}
-                                    {% for key, value in ratio.items %}
+                                {% for ratio in stock.ratios|slice:":1" %}
+                                    {% for key, value in ratio%}
                                     {% if key != 'Unnamed: 0'%}
                                         <th>{{ key }}</th>
                                     {% endif %}
@@ -406,7 +427,7 @@
                         <tbody>
                             {% for ratio in stock.ratios %}
                                 <tr>
-                                    {% for key, value in ratio.items %}
+                                    {% for key, value in ratio %}
                                         <td>{{ value }}</td>
                                     {% endfor %}
                                 </tr>

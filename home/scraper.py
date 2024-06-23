@@ -57,7 +57,6 @@ class Scraper:
         tabluar_data = {}
         ssid = get_hash(stock_name)
         soup = get_soup(self.url, HEADERS1)
-        print(soup)
         tabluar_data['balance_sheet'] = json.loads(self.get_balance_sheet(soup))
         tabluar_data['cash_flow'] = json.loads(self.get_cash_flow(soup))
         tabluar_data['ratios'] = json.loads(self.get_ratios(soup))
@@ -69,13 +68,25 @@ class Scraper:
         tabluar_data['peers'] = [ self.clean_keys(peer_data) for peer_data in json.loads(self.get_peers_data(soup)) ]
         tabluar_data['company_ratios'] = self.clean_keys(self.get_company_ratios(soup))
         tabluar_data['company_documents'] = self.get_company_documents(soup)
-        tabluar_data['stock_details'] = self.stock_details(soup)
 
         list_of_graphs_tables = self.get_graph_data(soup)
 
         # tabluar_data.update(list_of_graphs_tables)
 
         tabluar_data['graph_data'] = list_of_graphs_tables
+        tabluar_data['stock_details'] = self.stock_details(soup)
+
+
+        for key, _list in tabluar_data.items():
+            if type(_list) == list:
+                # converts dictionaries inside this list to tuple
+                new_list = [tuple(d.items()) for d in _list]
+                tabluar_data[key] = new_list
+            
+
+
+
+
 
         with open('./tabluar_data.json', 'w') as file:
             json.dump(tabluar_data, file)
@@ -126,7 +137,8 @@ class Scraper:
             table = quarters.find('table', {'class': 'data-table'})
             df = pd.read_html(str(table))[0]
             print("Got quarters data")
-            return df.to_json(orient='records')
+            data = df.to_json(orient='records')
+            return data
         except Exception as e:
             print(f"Error: {e} in quarters def")
             return None
