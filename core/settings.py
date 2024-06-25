@@ -33,6 +33,8 @@ if not SECRET_KEY:
 DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = [
+    "stocks-xckk.onrender.com",
+    "www.stocks-xckk.onrender.com",
     "https://stocks-xckk.onrender.com",
     "127.0.0.1",
     
