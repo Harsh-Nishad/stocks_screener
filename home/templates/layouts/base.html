@@ -31,6 +31,9 @@
     <link id="pagestyle_dark" href="{% static 'css/dark-theme-core.css' %}" rel="stylesheet" />
 <!-- Load Bootstrap CSS in the base template (base.html) -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS only -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
 
     {% block extrahead %}{% endblock extrahead %}
     {% block extrastyle %}{% endblock extrastyle %}
