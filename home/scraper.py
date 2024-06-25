@@ -3,6 +3,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import json
 import os
+import re
 
 import warnings
 warnings.filterwarnings('ignore', category=FutureWarning)
@@ -68,6 +69,7 @@ class Scraper:
         tabluar_data['peers'] = [ self.clean_keys(peer_data) for peer_data in json.loads(self.get_peers_data(soup)) ]
         tabluar_data['company_ratios'] = self.clean_keys(self.get_company_ratios(soup))
         tabluar_data['company_documents'] = self.get_company_documents(soup)
+        
 
         list_of_graphs_tables = self.get_graph_data(soup)
 
@@ -79,7 +81,6 @@ class Scraper:
 
         for key, _list in tabluar_data.items():
             if type(_list) == list:
-                # converts dictionaries inside this list to tuple
                 new_list = [tuple(d.items()) for d in _list]
                 tabluar_data[key] = new_list
             
@@ -193,7 +194,7 @@ class Scraper:
             warehouse_id, company_id = self.get_ids(soup)
             print(warehouse_id, company_id)
 
-            url = f'https://www.screener.in/api/company/{company_id}/peers/'
+            url = f'https://www.screener.in/api/company/{warehouse_id}/peers/'
             response = requests.get(url, headers=HEADERS2)
 
             soup2 = BeautifulSoup(response.text, 'html.parser')
@@ -293,7 +294,8 @@ class Scraper:
             for div in divs:
                 key = div.find('h3').text
                 links = div.find_all('a')
-                data_documents[key] = [link['href'] for link in links]
+                links = [{re.sub('\s+', ' ', a.text.strip()): a['href']} for a in links]
+                data_documents[key.replace(' ', '_').strip()] = links
 
             return data_documents
         except Exception as e:
