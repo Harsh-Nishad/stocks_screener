@@ -439,84 +439,41 @@
         </div>
     </div>
 
-    
-    
-
-
-
-    <div class="row justify-content-center mb-3">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card 3</h5>
-                    <p class="card-text">Content for card 3.</p>
-                </div>
+<!-- Documents Section -->
+<div class="row justify-content-center mb-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Company Documents</h5>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card 4</h5>
-                    <p class="card-text">Content for card 4.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card 5</h5>
-                    <p class="card-text">Content for card 5.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center mb-3">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card 6</h5>
-                    <p class="card-text">Content for card 6.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card 7</h5>
-                    <p class="card-text">Content for card 7.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center mb-3">
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card 8</h5>
-                    <p class="card-text">Content for card 8.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card 9</h5>
-                    <p class="card-text">Content for card 9.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card 10</h5>
-                    <p class="card-text">Content for card 10.</p>
-                </div>
+            <div class="d-flex flex-wrap justify-content-around">
+                {% for category, documents in stock.company_documents.items %}
+                    <div class="category-card card m-2" style="width: 23%;">
+                        <div class="card-header">
+                            <strong>{{ category }}</strong>
+                        </div>
+                        <ul class="list-group list-group-flush" id="list-{{category}}">
+                            {% for document in documents %}
+                                {% for title, link in document.items %}
+                                    <li class="list-group-item">
+                                        <a href="{{ link }}" target="_blank">{{ title }}</a>
+                                    </li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                        {% if documents|length > 3 %}
+                            <div class="card-footer text-center">
+                                <button class="btn btn-link text-primary" onclick="toggleMore(category)">View More</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
 </div>
+
+
 {% endblock %}
 
 {% block extrascript %}
@@ -531,6 +488,7 @@
 
 <!-- Load custom JavaScript -->
 <script src="{% static 'js/stock-charts.js' %}"></script>
+<script src="{% static 'js/demo.js' %}"></script>
 
 <script type="text/javascript">
     // Pass stock data to the separate JS file
