@@ -331,6 +331,82 @@
         </div>
     </div>
 
+    <!-- #shareholing pattern -->
+    <div class="row justify-content-center mb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title
+                    ">Shareholding Pattern Quarterly</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                {% for share in stock.shareholding_qtr|slice:":1" %}
+                                    {% for key, value in share %}
+                                    {% if key != 'Unnamed: 0'%}
+                                        <th>{{ key }}</th>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for share in stock.shareholding_qtr %}
+                                <tr>
+                                    {% for key, value in share %}
+                                        <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- #shareholing pattern ANNUALLY -->
+        <div class="row justify-content-center mb-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title
+                        ">Shareholding Pattern Annually</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    {% for share in stock.shareholding_annual|slice:":1" %}
+                                        {% for key, value in share %}
+                                        {% if key != 'Unnamed: 0'%}
+                                            <th>{{ key }}</th>
+                                        {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for share in stock.shareholding_annual %}
+                                    <tr>
+                                        {% for key, value in share %}
+                                            <td>{{ value }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     <!--balance sheet-->
     <div class="row justify-content-center mb-3">
         <div class="col-12">
