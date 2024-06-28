@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os, random, string
 from pathlib import Path
 from dotenv import load_dotenv
+import mimetypes
 
+mimetypes.add_type("text/javascript", ".js", True)
 load_dotenv()  # take environment variables from .env.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +33,8 @@ if not SECRET_KEY:
 DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = [
+    "stocks-xckk.onrender.com",
+    "www.stocks-xckk.onrender.com",
     "https://stocks-xckk.onrender.com",
     "127.0.0.1",
     
@@ -50,7 +54,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "home",
 ]
 

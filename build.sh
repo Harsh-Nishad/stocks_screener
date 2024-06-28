@@ -5,6 +5,9 @@ set -o errexit
 python -m pip install --upgrade pip
 
 pip install -r requirements.txt
-
-python manage.py collectstatic --no-input
+echo "Collect static files"
+python manage.py collectstatic 
+# check if static files are collected
+ls -l ./staticfiles
+echo "Apply database migrations"
 python manage.py migrate
