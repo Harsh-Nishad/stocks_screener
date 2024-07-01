@@ -188,76 +188,64 @@
         </div>
     </div>
 
-        <!-- Peer comparison -->
-        <div class="row justify-content-center mb-3">
+    
+    <div class="row justify-content-center mb-3">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Peer Comparison</h5>
                     </div>
                     <div class="table-responsive">
-                        <table class="table align-items-center mb-0 table-striped table-hover">
-                            <thead>
+                        <table class="table table-striped table-hover">
+                            <thead class="thead-light">
                                 <tr>
-                                        {% comment %} <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">S.No.</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CMP Rs.</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">P/E</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Market Cap Rs.Cr.</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Div Yld %</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NP Qtr Rs.Cr.</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtr Profit Var %</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sales Qtr Rs.Cr.</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qtr Sales Var %</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ROCE %</th> {% endcomment %}
-                                    <th>S.No.</th>
-                                    <th>Name</th>
-                                    <th class="text-center">CMP Rs.</th>
-                                    <th class="text-center">P/E</th>
-                                    <th class="text-center">Market Cap Rs.Cr.</th>
-                                    <th class="text-center">Div Yld %</th>
-                                    <th class="text-center">NP Qtr Rs.Cr.</th>
-                                    <th class="text-center">Qtr Profit Var %</th>
-                                    <th class="text-center">Sales Qtr Rs.Cr.</th>
-                                    <th class="text-center">Qtr Sales Var %</th>
-                                    <th class="text-center">ROCE %</th>
-
+                                    <th scope="col" class="text-center">S.No</th>
+                                    <th scope="col" class="text-center">Company Name</th>
+                                    <th scope="col" class="text-center">CMP Rs.</th>
+                                    <th scope="col" class="text-center">P/E</th>
+                                    <th scope="col" class="text-center">Market Cap Rs.Cr.</th>
+                                    <th scope="col" class="text-center">Div Yld %</th>
+                                    <th scope="col" class="text-center">NP Qtr Rs.Cr.</th>
+                                    <th scope="col" class="text-center">Qtr Profit Var %</th>
+                                    <th scope="col" class="text-center">Sales Qtr Rs.Cr.</th>
+                                    <th scope="col" class="text-center">Qtr Sales Var %</th>
+                                    <th scope="col" class="text-center">ROCE %</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for peer in stock.peers %}
+
+
+                                {% comment %} {
+                                    "s_no": 1.0,
+                                    "name": "JSW Steel",
+                                    "cmp_rs": 943.15,
+                                    "p_e": 27.36,
+                                    "mar_cap_rs_cr": 230642.99,
+                                    "div_yld_percent": 0.78,
+                                    "np_qtr_rs_cr": 1322.0,
+                                    "qtr_profit_var_percent": -64.55,
+                                    "sales_qtr_rs_cr": 46269.0,
+                                    "qtr_sales_var_percent": -1.48,
+                                    "roce_percent": 13.24
+                                }, {% endcomment %}
+                                {% comment %} peers structure is like [{},{},{}...] {% endcomment %}
+                             {%for peer in stock.peers%}
                                 <tr>
-                                    {% comment %} {% if peer.s_no %}
-                                    <td>{{ peer.s_no }}</td>
+                                    {% for key, value in peer %}
+                                    {% if value%}
+                                        <td class="text-center">{{ value }}</td>
                                     {% else %}
-                                    <td></td> {% endcomment %}
-                                    {% comment %} {% endif %}
-                                    <td>{{ peer.name }}</td>
-                                    <td class="text-center">{{ peer.cmp_rs }}</td>
-                                    <td class="text-center">{{ peer.p_e }}</td>
-                                    <td class="text-center">{{ peer.mar_cap_rs_cr }}</td>
-                                    <td class="text-center">{{ peer.div_yld_percent }}</td>
-                                    <td class="text-center">{{ peer.np_qtr_rs_cr }}</td>
-                                    <td class="text-center">{{ peer.qtr_profit_var_percent }}</td>
-                                    <td class="text-center">{{ peer.sales_qtr_rs_cr }}</td>
-                                    <td class="text-center">{{ peer.qtr_sales_var_percent }}</td>
-                                    <td class="text-center">{{ peer.roce_percent }}</td> {% endcomment %}
-                                {% for key, value in peer %}
-                                 {% if value %}
-                                    <td>{{ value }}</td>
-                                {% else %}
-                                    <td></td>
+                                        <td class="text-center"></td>
                                     {% endif %}
                                 {% endfor %}
-
                                 </tr>
-                                {% endfor %}
+                             {%endfor%}
                             </tbody>
-                        </table>                 
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <!--quarterly results-->
     <div class="row justify-content-center mb-3">
@@ -307,7 +295,7 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                {% for p_l in stock.profit_loss|slice:":1" %}
+                                {% for p_l in stock.profit_loss|slice:":1"%}
                                    {% for key, value in p_l %}
                                     {% if key != 'Unnamed: 0'%}
                                         <th>{{ key }}</th>
