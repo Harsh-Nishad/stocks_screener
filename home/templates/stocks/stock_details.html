@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body container-fluid">
-                    <h5 class="card-title text-center ">{{ stock.symbol }}</h5>
+                    <h5 class="card-title text-center text-capitalize ">{{ stock.symbol }}</h5>
                     <div class="row">
                         <!-- Company Details Column -->
                         <div class="col-xl-6 mb-xl-0 ">
@@ -197,7 +197,7 @@
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
-                            <thead class="thead-light">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th scope="col" class="text-center">S.No</th>
                                     <th scope="col" class="text-center">Company Name</th>
@@ -213,33 +213,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-
-                                {% comment %} {
-                                    "s_no": 1.0,
-                                    "name": "JSW Steel",
-                                    "cmp_rs": 943.15,
-                                    "p_e": 27.36,
-                                    "mar_cap_rs_cr": 230642.99,
-                                    "div_yld_percent": 0.78,
-                                    "np_qtr_rs_cr": 1322.0,
-                                    "qtr_profit_var_percent": -64.55,
-                                    "sales_qtr_rs_cr": 46269.0,
-                                    "qtr_sales_var_percent": -1.48,
-                                    "roce_percent": 13.24
-                                }, {% endcomment %}
-                                {% comment %} peers structure is like [{},{},{}...] {% endcomment %}
-                             {%for peer in stock.peers%}
+                             {%for peer in stock.peers|slice:":-1"%}
                                 <tr>
-                                    {% for key, value in peer %}
+                                {% for key, value in peer %}
                                     {% if value%}
-                                        <td class="text-center">{{ value }}</td>
+                                        <td class="text-center ">{{ value }}</td>
                                     {% else %}
                                         <td class="text-center"></td>
                                     {% endif %}
                                 {% endfor %}
                                 </tr>
                              {%endfor%}
+                                <tr class="table-dark">
+                                    {% for key, value in stock.peers|last %}
+                                        {% if value%}
+                                            <td class="text-center h6">{{ value }}</td>
+                                        {% else %}
+                                            <td class="text-center"></td>
+                                        {% endif %}
+                                    {% endfor %}
                             </tbody>
                         </table>
                     </div>
