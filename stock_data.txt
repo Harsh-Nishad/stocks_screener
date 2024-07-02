@@ -1,0 +1,96 @@
+Reliance Industries,RELIANCE
+Tata Consultancy Services,TCS
+HDFC Bank,HDFCBANK
+Infosys,INFY
+Hindustan Unilever,HINDUNILVR
+ICICI Bank,ICICIBANK
+Kotak Mahindra Bank,KOTAKBANK
+State Bank of India,SBIN
+Bajaj Finance,BAJFINANCE
+Wipro,WIPRO
+Bharti Airtel,BHARTIARTL
+Asian Paints,ASIANPAINT
+Maruti Suzuki,MARUTI
+Larsen & Toubro,LT
+HCL Technologies,HCLTECH
+Adani Green Energy,ADANIGREEN
+NTPC,NTPC
+Sun Pharmaceutical,SUNPHARMA
+Tech Mahindra,TECHM
+Tata Steel,TATASTEEL
+Axis Bank,AXISBANK
+Power Grid Corporation of India,POWERGRID
+Housing Development Finance Corporation,HDFC
+Mahindra & Mahindra,MAHM
+Bharat Petroleum Corporation,BPCL
+IndusInd Bank,INDUSINDBK
+Hero MotoCorp,HEROMOTOCO
+UltraTech Cement,ULTRACEMCO
+Dr. Reddy's Laboratories,DRREDDY
+Cipla,CIPLA
+Coal India,COALINDIA
+ITC,ITC
+Grasim Industries,GRASIM
+JSW Steel,JSWSTEEL
+Eicher Motors,EICHERMOT
+Britannia Industries,BRITANNIA
+Bajaj Auto,BAJAJ-AUTO
+TCS,TCS
+Hindalco Industries,HINDALCO
+M&M,M&M
+ONGC,ONGC
+Bharat Forge,BHARATFORG
+Divi's Laboratories,DIVISLAB
+Godrej Consumer Products,GODREJCP
+Siemens,SIEMENS
+United Spirits, MCDOWELL-N
+Ambuja Cements,AMBUJACEM
+Bajaj Finserv,BAJAJFINSV
+Crompton Greaves,CROMPTON
+GAIL,GAIL
+Adani Ports and Special Economic Zone,ADANIPORTS
+Zee Entertainment Enterprises,ZEEL
+Biocon,BIOCON
+Bosch,BOSCHLTD
+BHEL,BHEL
+Cadila Healthcare,CADILAHC
+Container Corporation of India,CONCOR
+DLF,DLF
+Godrej Properties,GODREJPROP
+Havells India,HAVELLS
+HDFC Life,HDFCLIFE
+Hindustan Zinc,HINDZINC
+Lupin,LUPIN
+MRF,MRF
+Nestle India,NESTLEIND
+Pidilite Industries,PIDILITIND
+SBI Life,SBILIFE
+Shree Cement,SHREECEM
+Torrent Pharmaceuticals,TORNTPHARM
+TVS Motor Company,TVSMOTOR
+UPL,UPL
+Vedanta,VEDL
+Voltas,VOLTAS
+Berger Paints India,BERGERPAINT
+Coforge,COFORGE
+Exide Industries,EXIDEIND
+Federal Bank,FEDERALBNK
+Hindustan Petroleum Corporation,HINDPETRO
+ICICI Prudential Life Insurance,ICICIPRULI
+Indiabulls Housing Finance,IBULHSGFIN
+Muthoot Finance,MUTHOOTFIN
+NMDC,NMDC
+Oracle Financial Services Software,OFSS
+Petronet LNG,PETRONET
+Piramal Enterprises,PEL
+PVR,PVR
+Ramco Cements,RAMCOCEM
+SAIL,SAIL
+Shriram Transport Finance,SRTRANSFIN
+Tata Power,TATAPOWER
+Tech Mahindra,TECHM
+Titan Company,TITAN
+Tata Motors,TATAMOTORS
+UltraTech Cement,ULTRACEMCO
+Union Bank of India,UNIONBANK
+Vodafone Idea,IDEA

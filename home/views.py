@@ -71,3 +71,30 @@ def stock_db(request , stock_symbol):
 
     data['symbol'] = stock_symbol
     return render(request, 'stocks/stock_details.html', {'stock': data})
+
+
+from django.http import JsonResponse
+from fuzzywuzzy import fuzz, process
+
+def load_stocks_from_file(filename):
+    stocks = []
+    with open(filename, 'r') as file:
+        for line in file:
+            name, symbol = line.strip().split(',')
+            stocks.append({"name": name, "symbol": symbol})
+    return stocks
+
+# Assuming 'stocks.txt' is in the same directory as your script
+stocks = load_stocks_from_file('./stock_data.txt')
+
+def get_stock_suggestions(query, limit=5):
+    suggestions = process.extract(query, [stock['name'] for stock in stocks], scorer=fuzz.partial_ratio, limit=limit)
+    suggested_stocks = [stock for stock in stocks if any(stock['name'] == suggestion[0] for suggestion in suggestions)]
+    return sorted(suggested_stocks, key=lambda x: fuzz.token_sort_ratio(x['name'], query), reverse=True)
+
+def stock_suggestions(request):
+    query = request.GET.get('q', '').strip()
+    if query:
+        suggestions = get_stock_suggestions(query)
+        return JsonResponse(suggestions, safe=False)
+    return JsonResponse([], safe=False)
