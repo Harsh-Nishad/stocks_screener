@@ -94,3 +94,4 @@ Tata Motors,TATAMOTORS
 UltraTech Cement,ULTRACEMCO
 Union Bank of India,UNIONBANK
 Vodafone Idea,IDEA
+Sandur Manganese & Iron Ores Ltd,SANDUMA 

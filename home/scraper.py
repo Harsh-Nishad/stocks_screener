@@ -39,7 +39,7 @@ class Scraper:
                 for stock in stock_list:
                     print(f"Scraping data for {stock}")
                     stock = stock.strip()
-                    url = f'https://www.screener.in/company/{stock}/consolidated/'
+                    url = f'https://www.screener.in/company/{stock}/'
                     self.url = url
                     data = self.scrape(stock, save_to_db)
                     if not save_to_db:
