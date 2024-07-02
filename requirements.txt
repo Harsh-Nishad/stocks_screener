@@ -13,3 +13,5 @@ pandas
 BeautifulSoup4
 lxml
 python-dotenv
+
+fuzzywuzzy
