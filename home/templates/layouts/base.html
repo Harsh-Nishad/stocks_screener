@@ -31,11 +31,13 @@
     <!-- Load Bootstrap CSS in the base template (base.html) -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS only -->
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+   
 
     {% block extrahead %}{% endblock extrahead %}
-    {% block extrastyle %}{% endblock extrastyle %}
+    {% block extrastyle %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    {% endblock extrastyle %}
 
 </head>
 
