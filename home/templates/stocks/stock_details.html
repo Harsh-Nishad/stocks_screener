@@ -6,7 +6,7 @@
 <div class="container-fluid py-4 px-8">
     <div class="row justify-content-center mb-3 mt-3">
         <div class="col-12">
-            <div class="card">
+            <div class="card heading">
                 <div class="card-body container-fluid">
                     <h5 class="card-title text-center text-capitalize ">{{ stock.symbol }}</h5>
                     <div class="row">
@@ -163,7 +163,6 @@
         </div>
     </div>
     
-    
     <div class="row justify-content-center mb-3">
         <div class="col-12">
             <div class="card">
@@ -171,7 +170,7 @@
                     <h5 class="card-title mb-0">Stock Graph</h5>
                     <div class="dropdown">
                         <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Price
+                            Select Data
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="#" data-graph="Price">Price</a></li>
@@ -188,12 +187,12 @@
         </div>
     </div>
 
-    
+        
     <div class="row justify-content-center mb-3">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Peer Comparison</h5>
+                        <h5 class="card-title">Peer Comparison</h5>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-hover table-bordered ">
@@ -242,9 +241,10 @@
     <!--quarterly results-->
     <div class="row justify-content-center mb-3">
         <div class="col-12">
-            <div class="card">
+            <div class="card pb-1">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Quarterly Results</h5>
+                    <h5 class="card-title">Quarterly Results</h5>
+                    <p class = "h6 pb-0" style = "text-align: right; "> Consolidated Figures in Rs. Crores</p>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center mb-0 table-striped table-hover">
@@ -281,6 +281,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Profit and Loss</h5>
+                    <p class = "h6" style = "text-align: right;"> Consolidated Figures in Rs. Crores</p>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center mb-0 table-striped table-hover">
@@ -316,8 +317,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title
-                    ">Shareholding Pattern Quarterly</h5>
+                    <h5 class="card-title">Shareholding Pattern Quarterly</h5>
+                    <p class = "h6" style = "text-align: right;"> Numbers in percentages</p>
                 </div>
                 <div class="table-responsive">
 
@@ -354,8 +355,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title
-                        ">Shareholding Pattern Annually</h5>
+                        <h5 class="card-title">Shareholding Pattern Annually</h5>
+                        <p class = "h6" style = "text-align: right;"> Numbers in percentages</p>
                     </div>
                     <div class="table-responsive">
 
@@ -395,6 +396,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Balance Sheet</h5>
+                    <p class = "h6" style = "text-align: right;"> Consolidated Figures in Rs. Crores</p>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center mb-0 table-striped table-hover">
@@ -431,6 +433,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Cash Flow</h5>
+                    <p class = "h6" style = "text-align: right;"> Consolidated Figures in Rs. Crores</p>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center mb-0 table-striped table-hover">
@@ -467,6 +470,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Ratios</h5>
+                    <p class = "h6" style = "text-align: right;"> Consolidated Figures in Rs. Crores</p>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center mb-0 table-striped table-hover">
@@ -547,6 +551,7 @@
 <!-- Load custom JavaScript -->
 <script src="{% static 'js/stock-charts.js' %}"></script>
 <script src="{% static 'js/demo.js' %}"></script>
+
 
 
 <script type="text/javascript">
