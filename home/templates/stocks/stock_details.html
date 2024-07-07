@@ -5,7 +5,6 @@
 {% block content %}
 <div class="container-fluid py-4 px-8">
     <div class="row justify-content-center mb-3 mt-3">
-        <div class="col-12">
             <div class="card heading">
                 <div class="card-body container-fluid">
                     <h5 class="card-title text-center text-capitalize ">{{ stock.symbol }}</h5>
@@ -159,12 +158,10 @@
                         
                     </div>
                 </div>
-            </div>
         </div>
     </div>
     
     <div class="row justify-content-center mb-3">
-        <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0">Stock Graph</h5>
@@ -184,71 +181,74 @@
                     <canvas id="stock-chart" class="chart-canvas p-4" style="max-height: 40vh;"></canvas>
                 </div>
             </div>
-        </div>
     </div>
 
         
     <div class="row justify-content-center mb-3">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
+      
+        <div class="card shadow border-radius-lg p-0">
+
+                <div class="card-header ">
                         <h5 class="card-title">Peer Comparison</h5>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover table-bordered ">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col" class="text-center">S.No</th>
-                                    <th scope="col" class="text-center">Company Name</th>
-                                    <th scope="col" class="text-center">CMP Rs.</th>
-                                    <th scope="col" class="text-center">P/E</th>
-                                    <th scope="col" class="text-center">Market Cap Rs.Cr.</th>
-                                    <th scope="col" class="text-center">Div Yld %</th>
-                                    <th scope="col" class="text-center">NP Qtr Rs.Cr.</th>
-                                    <th scope="col" class="text-center">Qtr Profit Var %</th>
-                                    <th scope="col" class="text-center">Sales Qtr Rs.Cr.</th>
-                                    <th scope="col" class="text-center">Qtr Sales Var %</th>
-                                    <th scope="col" class="text-center">ROCE %</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             {%for peer in stock.peers|slice:":-1"%}
-                                <tr>
-                                {% for key, value in peer %}
-                                    {% if value%}
-                                        <td class="text-center ">{{ value }}</td>
-                                    {% else %}
-                                        <td class="text-center"></td>
-                                    {% endif %}
-                                {% endfor %}
-                                </tr>
-                             {%endfor%}
-                                <tr class="table-dark">
-                                    {% for key, value in stock.peers|last %}
+                </div>
+                <div class="table-responsive">
+                            <table class="table table-striped table-hover table-sm ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">S.No</th>
+                                        <th scope="col" class="text-center">Company Name</th>
+                                        <th scope="col" class="text-center">CMP Rs.</th>
+                                        <th scope="col" class="text-center">P/E</th>
+                                        <th scope="col" class="text-center">Market Cap Rs.Cr.</th>
+                                        <th scope="col" class="text-center">Div Yld %</th>
+                                        <th scope="col" class="text-center">NP Qtr Rs.Cr.</th>
+                                        <th scope="col" class="text-center">Qtr Profit Var %</th>
+                                        <th scope="col" class="text-center">Sales Qtr Rs.Cr.</th>
+                                        <th scope="col" class="text-center">Qtr Sales Var %</th>
+                                        <th scope="col" class="text-center">ROCE %</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {%for peer in stock.peers|slice:":-1"%}
+                                    <tr>
+                                    {% for key, value in peer %}
                                         {% if value%}
-                                            <td class="text-center h6">{{ value }}</td>
+                                            <td class="text-center ">{{ value }}</td>
                                         {% else %}
                                             <td class="text-center"></td>
                                         {% endif %}
                                     {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                                    </tr>
+                                {%endfor%}
+                                    <tr class="table-dark">
+                                        {% for key, value in stock.peers|last %}
+                                            {% if value%}
+                                                <td class="text-center h6">{{ value }}</td>
+                                            {% else %}
+                                                <td class="text-center"></td>
+                                            {% endif %}
+                                        {% endfor %}
+                                </tbody>
+                            </table>
                 </div>
             </div>
         </div>
 
-    <!--quarterly results-->
+
+
+   
+   
+        <!--quarterly results-->
     <div class="row justify-content-center mb-3">
-        <div class="col-12">
-            <div class="card pb-1">
+        
+        <div class="card shadow border-radius-lg p-0">
                 <div class="card-header">
                     <h5 class="card-title">Quarterly Results</h5>
                     <p class = "h6 pb-0" style = "text-align: right; "> Consolidated Figures in Rs. Crores</p>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center mb-0 table-striped table-hover">
-                        <thead class="thead-dark">
+                    <table class="table table-striped table-hover table-sm ">
+                        <thead class="thead-light">
                             <tr>
                                 <th>Category</th>
                                 {% for quarter in stock.quarters|slice:":1" %}
@@ -271,21 +271,19 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
         </div>
     </div>
 
     <!--profit and loss-->
     <div class="row justify-content-center mb-3">
-        <div class="col-12">
-            <div class="card">
+        <div class="card shadow border-radius-lg p-0">
                 <div class="card-header">
                     <h5 class="card-title">Profit and Loss</h5>
                     <p class = "h6" style = "text-align: right;"> Consolidated Figures in Rs. Crores</p>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center mb-0 table-striped table-hover">
-                        <thead class="thead-dark">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead class="thead-light">
                             <tr>
                                 <th></th>
                                 {% for p_l in stock.profit_loss|slice:":1"%}
@@ -310,20 +308,18 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 
     <!-- #shareholing pattern -->
     <div class="row justify-content-center mb-3">
-        <div class="col-12">
-            <div class="card">
+        <div class="card shadow border-radius-lg p-0">
                 <div class="card-header">
                     <h5 class="card-title">Shareholding Pattern Quarterly</h5>
                     <p class = "h6" style = "text-align: right;"> Numbers in percentages</p>
                 </div>
                 <div class="table-responsive">
-
-                    <table class="table align-items-center mb-0 table-striped table-hover">
-                        <thead class="thead-dark">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead class="thead-light">
                             <tr>
                                 <th></th>
                                 {% for share in stock.shareholding_qtr|slice:":1" %}
@@ -348,20 +344,17 @@
                 </div>
             </div>
         </div>
-    </div>
 
-        <!-- #shareholing pattern ANNUALLY -->
+    <!-- #shareholing pattern ANNUALLY -->
         <div class="row justify-content-center mb-3">
-            <div class="col-12">
-                <div class="card">
+            <div class="card shadow border-radius-lg p-0">
                     <div class="card-header">
                         <h5 class="card-title">Shareholding Pattern Annually</h5>
                         <p class = "h6" style = "text-align: right;"> Numbers in percentages</p>
                     </div>
                     <div class="table-responsive">
-
-                        <table class="table align-items-center mb-0 table-striped table-hover">
-                            <thead class="thead-dark">
+                        <table class="table table-striped table-hover table-sm">
+                            <thead class="thead-light">
                                 <tr>
                                     <th></th>
                                     {% for share in stock.shareholding_annual|slice:":1" %}
@@ -386,21 +379,19 @@
                     </div>
                 </div>
             </div>
-        </div>
 
 
 
     <!--balance sheet-->
     <div class="row justify-content-center mb-3">
-        <div class="col-12">
-            <div class="card">
+        <div class="card shadow border-radius-lg p-0">
                 <div class="card-header">
                     <h5 class="card-title">Balance Sheet</h5>
                     <p class = "h6" style = "text-align: right;"> Consolidated Figures in Rs. Crores</p>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center mb-0 table-striped table-hover">
-                        <thead class="thead-dark">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead class="thead-light">
                             <tr>
                                 <th></th>
                                 {% for balance in stock.balance_sheet|slice:":1" %}
@@ -422,22 +413,21 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                
                 </div>
-            </div>
         </div>
     </div>
 
     <!--cash flow-->
     <div class="row justify-content-center mb-3">
-        <div class="col-12">
-            <div class="card">
+        <div class="card shadow border-radius-lg p-0">
                 <div class="card-header">
                     <h5 class="card-title">Cash Flow</h5>
                     <p class = "h6" style = "text-align: right;"> Consolidated Figures in Rs. Crores</p>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center mb-0 table-striped table-hover">
-                        <thead class="thead-dark">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead class="thead-light">
                             <tr>
                                 <th></th>
                                 {% for cash in stock.cash_flow|slice:"1" %}
@@ -460,21 +450,19 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
         </div>
     </div>
 
     <!--ratios-->
     <div class="row justify-content-center mb-3">
-        <div class="col-12">
-            <div class="card">
+        <div class="card shadow border-radius-lg p-0">
                 <div class="card-header">
                     <h5 class="card-title">Ratios</h5>
                     <p class = "h6" style = "text-align: right;"> Consolidated Figures in Rs. Crores</p>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center mb-0 table-striped table-hover">
-                        <thead class="thead-dark">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead class="thead-light">
                             <tr>
                                 <th></th>
                                 {% for ratio in stock.ratios|slice:":1" %}
@@ -497,44 +485,43 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
         </div>
     </div>
 
 <!-- Documents Section -->
-<div class="row justify-content-center mb-3">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Company Documents</h5>
-            </div>
-            <div class="d-flex flex-wrap justify-content-around">
-                {% for category, documents in stock.company_documents.items %}
-                    <div class="category-card card m-2" style="width: 23%;">
-                        <div class="card-header">
-                            <strong>{{ category }}</strong>
-                        </div>
-                        <ul class="list-group list-group-flush" id="list-{{category}}">
-                            {% for document in documents %}
-                                {% for title, link in document.items %}
-                                    <li class="list-group-item">
-                                        <a href="{{ link }}" target="_blank">{{ title }}</a>
-                                    </li>
-                                {% endfor %}
-                            {% endfor %}
-                        </ul>
-                        {% if documents|length > 3 %}
-                            <div class="card-footer text-center">
-                                <button class="btn btn-link text-primary" onclick="toggleMore(category)">View More</button>
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>
 
+    <div class="row justify-content-center mb-3">
+        <div class="card shadow border-radius-lg p-0">
+                <div class="card-header">
+                    <h5 class="card-title">Company Documents</h5>
+                </div>
+                <div class="d-flex flex-wrap justify-content-around">
+                    {% for category, documents in stock.company_documents.items %}
+                        <div class="category-card card m-2" style="width: 23%;">
+                            <div class="card-header">
+                                <strong>{{ category }}</strong>
+                            </div>
+                            <ul class="list-group list-group-flush" id="list-{{category}}">
+                                {% for document in documents %}
+                                    {% for title, link in document.items %}
+                                        <li class="list-group-item">
+                                            <a href="{{ link }}" target="_blank">{{ title }}</a>
+                                        </li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                            {% if documents|length > 3 %}
+                                <div class="card-footer text-center">
+                                    <button class="btn btn-link text-primary" onclick="toggleMore(category)">View More</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+    </div>
+
+</div>
+{% comment %} container ends {% endcomment %}
 
 {% endblock %}
 

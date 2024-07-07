@@ -17,15 +17,17 @@
     display: block;
 }
 .card .card-header {
-    padding: 0.75rem 1.25rem;
-    background-color: #cccfd3;
-    
+    background-color: #FFFFFF;
 }
 
-/* # make the card rounded */
-.card {
-    border-radius: 1rem;
+
+
+
+
+.card.heading{
+    border-radius: 2rem;
 }
+
 
 .card-title{
     font-size: 1.75rem;
@@ -35,14 +37,33 @@
 }
 
 .card.heading{
-    background-color: #cccfd3;
-    border-bottom: 1px solid #e9ecef;
-    padding: 1rem;
-    border-radius: 1rem;
+    background-color: #FFFFFF
+    /* border-radius: 1rem; */
 }
 
 .card.heading .card-title{
     font-size: 2rem;
     font-weight: 800;
+}
+
+.table{
+    border-collapse: collapse;
+   
+}
+
+/* change the colour of class table-striped in bootstarp
+ */
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color:#F8F8FC;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color:#FFFFFF;
+}
+
+.table 
+.thead-light th {
+    background-color: #FFFFFF;
 }
 
