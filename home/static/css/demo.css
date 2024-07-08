@@ -1,58 +1,9 @@
-.category-card {
-    max-height: 400px;
-    overflow: hidden;
-}
-.category-card .list-group-item {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.category-card .card-footer {
-    display: none;
-}
-.category-card .list-group-item:nth-child(n+4) {
-    display: none;
-}
-.category-card .card-footer {
-    display: block;
-}
-.card .card-header {
-    background-color: #FFFFFF;
-}
 
-
-
-
-
-.card.heading{
-    border-radius: 2rem;
-}
-
-
-.card-title{
-    font-size: 1.75rem;
-    font-weight: 500;
-    color: #012253;
-    margin-bottom: 0.75rem;
-}
-
-.card.heading{
-    background-color: #FFFFFF
-    /* border-radius: 1rem; */
-}
-
-.card.heading .card-title{
-    font-size: 2rem;
-    font-weight: 800;
-}
+/* required  */
 
 .table{
     border-collapse: collapse;
-   
 }
-
-/* change the colour of class table-striped in bootstarp
- */
 
 .table-striped tbody tr:nth-of-type(odd) {
     background-color:#F8F8FC;
@@ -67,3 +18,7 @@
     background-color: #FFFFFF;
 }
 
+
+.card-header{
+    border-bottom: 20px solid #00468b;
+}
