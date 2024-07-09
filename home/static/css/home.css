@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size: 48px;
+    color: #333;
+    margin: 0;
+}
+
+header p {
+    color: #666;
+    font-size: 16px;
+}
+
+main {
+    margin-top: 30px;
+}
+
+#search-bar {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.suggestions {
+    margin-top: 20px;
+}
+
+.suggestions button {
+    background-color: #f4f7fa;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.suggestions button:hover {
+    background-color: #e0e5eb;
+}

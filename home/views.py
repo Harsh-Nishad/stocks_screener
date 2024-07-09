@@ -9,8 +9,7 @@ from .insert_db import get_list_of_stocks,get_one_stock_data
 
 def index(request):
 
-    # Page from the theme 
-    return render(request, 'pages/index.html')
+    return render(request, 'home/index.html')
 
 
 
@@ -64,10 +63,6 @@ def stock_db(request , stock_symbol):
     del data['date']
     with open('data.json', 'w') as f:
         json.dump(data, f)
-
-
-    
-
 
     data['symbol'] = stock_symbol
     return render(request, 'stocks/stock_details.html', {'stock': data})

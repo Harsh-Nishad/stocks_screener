@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screener</title>
+    {% block extrastyle %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% endblock extrastyle %}
+</head>
+<body>
+    <div class="container">
+        <header class="my-4">
+            <h1 class="display-4">Screener</h1>
+            <p class="lead">Stock analysis and screening tool for investors in India.</p>
+        </header>
+        <main>
+            
+            <input type="text" id="search-input" class="form-control" placeholder="Search for a company">
+            <div id="suggestions-container" class="dropdown-menu" style="display: none;"></div>
+        </main>
+    </div>
+    <script src="{% static 'js/home.js' %}"></script>
+    <script src="{% static 'js/core/jquery.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            // Check if jQuery is working
+            console.log('jQuery version:', $.fn.jquery);
+
+            const searchInput = $('#search-input');
+            const suggestionsContainer = $('#suggestions-container');
+
+            searchInput.on('input', function() {
+                const query = searchInput.val();
+                if (query.length > 1) {
+                    $.ajax({
+                        url: "{% url 'stock_suggestions' %}",
+                        data: { q: query },
+                        success: function(data) {
+                            if (data.length > 0) {
+                                suggestionsContainer.html(data.map(stock => `<a class="dropdown-item" href="/stock_scrape/${stock.symbol}/">${stock.name}</a>`).join(''));
+                                suggestionsContainer.css({ top: searchInput.position().top + searchInput.outerHeight(), left: searchInput.position().left });
+                                suggestionsContainer.show();
+                            } else {
+                                suggestionsContainer.hide();
+                            }
+                        }
+                    });
+                } else {
+                    suggestionsContainer.hide();
+                }
+            });
+
+            $(document).on('click', function(event) {
+                if (!$(event.target).closest('#suggestions-container, #search-input').length) {
+                    suggestionsContainer.hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
