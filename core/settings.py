@@ -47,9 +47,9 @@ if RENDER_EXTERNAL_HOSTNAME:
 # Application definition
 
 INSTALLED_APPS = [
-    'admin_soft.apps.AdminSoftDashboardConfig',
     "django.contrib.admin",
     "django.contrib.auth",
+    'admin_soft.apps.AdminSoftDashboardConfig',
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",

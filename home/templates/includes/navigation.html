@@ -93,7 +93,7 @@
 
       suggestionsContainer.on('click', '.suggestion-item', function() {
           const symbol = $(this).data('symbol');
-          window.location.href = `/stock_scrape/${symbol}/`;
+          window.location.href = `/stock/${symbol}/`;
       });
 
       $(document).on('click', function(event) {
