@@ -15,18 +15,10 @@ def get_stocks():
     return cached_stocks
 
 def index(request):
-    # Page from the theme
-    return render(request, 'home/index.html')
-
     return render(request, 'home/index.html')
 
 
-
-def stock(request, stock_symbol):
-    return HttpResponse(f"Stock symbol: {stock_symbol}")
-
-
-def stock_scrape(request , stock_symbol):
+def stock_db(request , stock_symbol):
     if not stock_symbol:
         return HttpResponse("No stock symbol provided")
     
