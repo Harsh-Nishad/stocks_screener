@@ -2,6 +2,7 @@ import psycopg2
 from psycopg2 import sql
 from dotenv import load_dotenv
 from traceback import print_exc
+import dj_database_url
 
 
 # db_params = {
@@ -32,12 +33,14 @@ db_params = {
     'port': os.getenv('DB_PORT')
 }
 
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
+print(DATABASE_URL)
 
 def create_or_update_stock(stock_name, ssid, data_dict):
     current_date = datetime.now()
     try:
-        connection = psycopg2.connect(**db_params)
+        connection = psycopg2.connect(dsn=DATABASE_URL)
         cursor = connection.cursor()
 
         create_table_query = '''
@@ -86,7 +89,7 @@ def create_or_update_stock(stock_name, ssid, data_dict):
 
 def get_list_of_stocks():
     try:
-        connection = psycopg2.connect(**db_params)
+        connection = psycopg2.connect(dsn=DATABASE_URL)
         cursor = connection.cursor()
 
         cursor.execute('SELECT stock_name FROM list_of_stocks')
@@ -114,7 +117,7 @@ columns=['ssid', 'stock_name', 'date', 'balance_sheet', 'cash_flow', 'ratios', '
 
 def get_one_stock_data(stock_name):
     try:
-        connection = psycopg2.connect(**db_params)
+        connection = psycopg2.connect(dsn=DATABASE_URL)
         cursor = connection.cursor()
 
         cursor.execute('SELECT * FROM stocks_data WHERE stock_name = %s', (stock_name,))
