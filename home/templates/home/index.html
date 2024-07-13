@@ -37,10 +37,10 @@
         jQuery(document).ready(function($) {
             // Check if jQuery is working
             console.log('jQuery version:', $.fn.jquery);
-
+      
             const searchInput = $('#search-input');
             const suggestionsContainer = $('#suggestions-container');
-
+      
             searchInput.on('input', function() {
                 const query = searchInput.val();
                 if (query.length > 1) {
@@ -49,7 +49,7 @@
                         data: { q: query },
                         success: function(data) {
                             if (data.length > 0) {
-                                suggestionsContainer.html(data.map(stock => `<a class="dropdown-item" href="/stock_scrape/${stock.symbol}/">${stock.name}</a>`).join(''));
+                                suggestionsContainer.html(data.map(stock => `<div class="suggestion-item p-2" data-symbol="${stock.symbol}" style="cursor: pointer;">${stock.name}</div>`).join(''));
                                 suggestionsContainer.css({ top: searchInput.position().top + searchInput.outerHeight(), left: searchInput.position().left });
                                 suggestionsContainer.show();
                             } else {
@@ -61,13 +61,21 @@
                     suggestionsContainer.hide();
                 }
             });
-
+      
+            suggestionsContainer.on('click', '.suggestion-item', function() {
+                const symbol = $(this).data('symbol');
+                window.location.href = `/stock/${symbol}/`;
+            });
+      
             $(document).on('click', function(event) {
                 if (!$(event.target).closest('#suggestions-container, #search-input').length) {
                     suggestionsContainer.hide();
                 }
             });
         });
-    </script>
+      
+        
+      </script>
+      
 </body>
 </html>
