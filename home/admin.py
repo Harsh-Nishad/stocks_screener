@@ -65,6 +65,6 @@ class StockAdmin(admin.ModelAdmin):
                 messages.error(request, f"Error updating stock: {stock}")
                 continue
         messages.success(request, 'Stocks updated successfully')
-        return redirect('admin:home')
+        return redirect('admin')
     
 admin.site.register(Stock, StockAdmin)

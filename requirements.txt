@@ -15,3 +15,5 @@ lxml
 python-dotenv
 
 fuzzywuzzy
+dj-database-url
+python-Levenshtein
