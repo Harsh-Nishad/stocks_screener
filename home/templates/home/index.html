@@ -1,38 +1,147 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Screener</title>
-    {% block extrastyle %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Be-Meener</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    {% endblock extrastyle %}
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: #d1d5db;
+            margin: 0;
+            padding: 0;
+        }
+        .height {
+            height: 100vh;
+        }
+        .form {
+            position: relative;
+        }
+        .form .fa-search {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+        .form span {
+            position: absolute;
+            right: 17px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 2px;
+            border-left: 1px solid #d1d5db;
+        }
+        .left-pan {
+            padding-left: 7px;
+        }
+        .left-pan i {
+            padding-left: 10px;
+        }
+        .form-input {
+            height: 55px;
+            text-indent: 33px;
+            border-radius: 10px;
+        }
+        .form-input:focus {
+            box-shadow: none;
+            border: none;
+        }
+        .suggestions-container {
+            position: absolute;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggestion-item:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .company-name {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 767px) {
+            .height {
+                height: auto;
+                margin-top: 20px;
+            }
+            .form-input {
+                height: 45px;
+                text-indent: 30px;
+            }
+            .form .fa-search, .form span {
+                top: 10px;
+                transform: none;
+            }
+            .left-pan i {
+                padding-left: 5px;
+            }
+            .company-name {
+                font-size: 1.75rem;
+                margin-bottom: 15px;
+            }
+        }
+        footer {
+            background: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid #e4e5e7;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-sm border-radius-xl" id="navbarBlur" navbar-scroll="true" style="background: #f8f9fa; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
-            <img src="{% static 'img/logo-no-text.png' %}" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
+            <img src="{% static 'img/logo-no-text.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
             Bemeener
         </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Keeping it minimal as per request, so no additional links -->
+            </ul>
+        </div>
     </nav>
-    </main>
-    <div class="container">
-        <header class="my-4">
-            <h1 class="display-4">Bemeener</h1>
-            <p class="lead">Stock analysis and screening tool for investors in India.</p>
-        </header>
 
-            <input type="text" id="search-input" class="form-control" placeholder="Search for a company">
-            <div id="suggestions-container" class="dropdown-menu" style="display: none;"></div>
+    <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-md-6">
+                <div class="company-name">Be-Meener</div>
+                <div class="form">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="search-input" class="form-control form-input" placeholder="Search for a company">
+                    <div id="suggestions-container" class="suggestions-container"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="{% static 'js/home.js' %}"></script>
-    <script src="{% static 'js/core/jquery.js' %}"></script>
+
+    <footer>
+        <p>&copy; 2024 YourBrand. All rights reserved.</p>
+        <p>Contact us: info@yourbrand.com</p>
+    </footer>
+
     <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/core/jquery.js' %}"></script>
     <script>
         jQuery(document).ready(function($) {
             // Check if jQuery is working
@@ -73,9 +182,6 @@
                 }
             });
         });
-      
-        
-      </script>
-      
+    </script>
 </body>
 </html>
