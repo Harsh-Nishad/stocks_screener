@@ -32,14 +32,17 @@ class StockAdmin(admin.ModelAdmin):
                 for line in lines:
                     try:
                         company_name, company_symbol = map(str.strip, line.split(','))
-                        stock, created = Stock.objects.get_or_create(company_name=company_name, company_symbol=company_symbol)
+                        try:    
+                            stock, created = Stock.objects.get_or_create(company_name=company_name, company_symbol=company_symbol)
+                        except:
+                            continue
                         if created:
                             created_stocks.append(stock)
                     except ValueError:
                         messages.error(request, f"Invalid format for line: {line}")
                 if created_stocks:
                     messages.success(request, f"Successfully added {len(created_stocks)} stocks.")
-                return redirect('admin:home')  # Redirect to stock change list
+                return redirect('admin')  # Redirect to stock change list
         else:
             form = StockBulkAddForm()
         context = {
