@@ -42,7 +42,7 @@ class StockAdmin(admin.ModelAdmin):
                         messages.error(request, f"Invalid format for line: {line}")
                 if created_stocks:
                     messages.success(request, f"Successfully added {len(created_stocks)} stocks.")
-                return redirect('admin')  # Redirect to stock change list
+                return redirect('/admin')  
         else:
             form = StockBulkAddForm()
         context = {
@@ -68,6 +68,6 @@ class StockAdmin(admin.ModelAdmin):
                 messages.error(request, f"Error updating stock: {stock}")
                 continue
         messages.success(request, 'Stocks updated successfully')
-        return redirect('admin')
+        return redirect('/admin')
     
 admin.site.register(Stock, StockAdmin)
