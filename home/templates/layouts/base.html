@@ -8,6 +8,18 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
 
 <head>
+    {% comment %} this is for table striped  {% endcomment %}
+    <style>
+        .table-striped {
+            --bs-table-accent-bg: var(--bs-table-striped-bg);
+        }
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            --bs-table-striped-bg: #F8F8FC; /* Custom color for odd rows */
+        }
+        .table-striped > tbody > tr:nth-of-type(even) {
+            --bs-table-striped-bg: #FFFFFF; /* Custom color for even rows */
+        }
+    </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>
       Soft UI Dashboard - {% block title %}{% endblock %}
@@ -40,7 +52,7 @@
 
 </head>
 
-<body class="g-sidenav-show bg-gray-100">
+<body class="g-sidenav-show " style = "background-color: #EAEEF5;">
 
     {% comment %} {% include "includes/sidebar.html" %} {% endcomment %}
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">

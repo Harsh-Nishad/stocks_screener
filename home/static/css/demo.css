@@ -1,17 +1,6 @@
 
 /* required  */
 
-.table{
-    border-collapse: collapse;
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color:#F8F8FC;
-}
-
-.table-striped tbody tr:nth-of-type(even) {
-    background-color:#FFFFFF;
-}
 
 .table 
 .thead-light th {
