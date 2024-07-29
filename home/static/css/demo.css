@@ -1,6 +1,8 @@
 
 /* required  */
-
+.table{
+    border-collapse: collapse;
+}
 
 .table 
 .thead-light th {
