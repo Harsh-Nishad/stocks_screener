@@ -13,129 +13,135 @@ document.addEventListener('DOMContentLoaded', function() {
         Volume: stock.graph_data.Volume.map(item => ({ x: item.Date, y: parseFloat(item.Value) }))
     };
 
+    // Color configuration for datasets
+    const colors = {
+        Price: '#17c1e8',
+        DMA50: '#ff9800',
+        DMA200: '#f44336',
+        Volume: '#4caf50'
+    };
+
     // Function to create a chart
-    function createChart(data, type = 'line') {
+    function createChart() {
         var ctx = document.getElementById("stock-chart").getContext("2d");
         if (window.stockChart) {
             window.stockChart.destroy();
         }
 
-        var chartType = (type === 'bar') ? 'bar' : 'line';
-        var gradientStroke = ctx.createLinearGradient(0, 500, 0, 0); // Adjusted vertical positions
-        gradientStroke.addColorStop(1, 'rgba(23, 193, 232, 0.3)'); // Increased opacity
-        gradientStroke.addColorStop(0.8, 'rgba(23, 193, 232, 0.2)');
-        gradientStroke.addColorStop(0.5, 'rgba(23, 193, 232, 0.1)');
-        gradientStroke.addColorStop(0.3, 'rgba(23, 193, 232, 0.05)');
-        gradientStroke.addColorStop(0, 'rgba(23, 193, 232, 0.02)');
+        var activeDatasets = [
+            {
+                label: 'Price',
+                data: datasets.Price,
+                borderColor: colors.Price,
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.4,
+                type: 'line',
+                yAxisID: 'y-price',
+                order: 0
+            },
+            {
+                label: 'DMA50',
+                data: datasets.DMA50,
+                borderColor: colors.DMA50,
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.4,
+                type: 'line',
+                yAxisID: 'y-price',
+                order: 0
+            },
+            {
+                label: 'DMA200',
+                data: datasets.DMA200,
+                borderColor: colors.DMA200,
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.4,
+                type: 'line',
+                yAxisID: 'y-price',
+                order: 0
+            },
+            {
+                label: 'Volume',
+                data: datasets.Volume,
+                borderColor: colors.Volume,
+                backgroundColor: colors.Volume + '80',
+                borderWidth: 0,
+                pointRadius: 0,
+                tension: 0.4,
+                type: 'bar',
+                yAxisID: 'y-volume',
+                order: 1
+            }
+        ];
 
         window.stockChart = new Chart(ctx, {
-            type: chartType,
-            data: {
-                datasets: [{
-                    label: (chartType === 'line') ? 'Stock Data' : 'Volume Data',
-                    data: data,
-                    borderColor: '#17c1e8', // Border color for the line or bar
-                    backgroundColor: (chartType === 'line') ? gradientStroke : '#17c1e8', // Background color for line or bar
-                    borderWidth: (chartType === 'line') ? 3 : 0,
-                    fill: (chartType === 'line') ? true : false,
-                    pointRadius: 0,
-                    tension: 0.4,
-                    borderRadius: 4
-                }]
-            },
+            data: { datasets: activeDatasets },
             options: {
-                maintainAspectRatio: true,
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
                 plugins: {
                     legend: {
-                        display: false
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
                     }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
                 },
                 scales: {
                     x: {
                         type: 'time',
-                        time: {
-                            unit: 'month'
-                        },
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
+                        time: { unit: 'month' },
+                        grid: { display: false },
                         ticks: {
-                            display: true,
-                            color: '#b2b9bf',
-                            padding: 10,
-                            font: {
-                                size: 11,
-                                family: 'Open Sans',
-                                style: 'normal',
-                                lineHeight: 2
-                            }
+                            color: '#666',
+                            font: { size: 12 }
                         }
                     },
-                    y: {
+                    'y-price': {
+                        position: 'left',
                         grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5]
+                            color: '#e0e0e0',
+                            drawBorder: false
                         },
                         ticks: {
-                            display: true,
-                            padding: 10,
-                            color: '#b2b9bf',
-                            font: {
-                                size: 11,
-                                family: 'Open Sans',
-                                style: 'normal',
-                                lineHeight: 2
-                            }
+                            color: '#666',
+                            font: { size: 12 }
+                        }
+                    },
+                    'y-volume': {
+                        position: 'right',
+                        grid: { display: false },
+                        ticks: {
+                            color: '#666',
+                            font: { size: 12 }
                         }
                     }
                 }
             }
         });
-
-        // Update chart dimensions after creating it
-        updateChartDimensions();
     }
 
-    // Function to update chart dimensions based on viewport
-    function updateChartDimensions() {
-        var chartCanvas = document.getElementById('stock-chart');
-        var parentContainer = chartCanvas.parentElement;
-
-        // Set canvas height based on parent container's computed height
-        var computedHeight = window.getComputedStyle(parentContainer).height;
-        chartCanvas.style.height = computedHeight;
-        window.stockChart.resize(); // Resize the chart after setting new dimensions
-    }
-
-    // Initial chart with Price dataset
-    createChart(datasets.Price);
-
-    // Dropdown change event
-    document.querySelectorAll('.dropdown-item').forEach(function(item) {
-        item.addEventListener('click', function() {
-            var selectedGraph = this.getAttribute('data-graph');
-            document.getElementById('dropdownMenuButton').textContent = this.textContent; // Update dropdown button text
-            if (selectedGraph === 'Volume') {
-                createChart(datasets[selectedGraph], 'bar'); // Create bar chart for Volume
-            } else {
-                createChart(datasets[selectedGraph]); // Default to line chart for other datasets
-            }
-        });
-    });
+    // Initial chart creation
+    createChart();
 
     // Resize chart on window resize
     window.addEventListener('resize', function() {
-        updateChartDimensions();
+        if (window.stockChart) {
+            window.stockChart.resize();
+        }
     });
 });

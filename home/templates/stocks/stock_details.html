@@ -2,6 +2,10 @@
 {% load static %}
 {% load js %}
 
+{% block title %}
+    {{ stock.symbol }} - {{ stock.stock_details.company_name }}
+{% endblock title %}
+
 {% block content %}
 <div class="container-fluid py-4 px-5">
     <div class="row justify-content-center mb-3 mt-3">
@@ -259,28 +263,19 @@
                 </div>
         </div>
     </div>
-    
     <div class="row justify-content-center mb-3">
-            <div class="card" style="border-radius: 1rem; width: 100%;">
-                <div class="card-header d-flex justify-content-between align-items-center"  style="border-radius: 1rem; border-bottom: 0px; background-color: #FFFFFF;">
-                    <h5 class="card-title mb-0" style="font-family: 'Arial', sans-serif; font-size: 1.8rem; font-weight: 600; color: #1b0477;">Stock Chart</h5>
-                    <div class="dropdown">
-                        <button class="btn bg-gradient-info dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Select Data
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#" data-graph="Price">Price</a></li>
-                            <li><a class="dropdown-item" href="#" data-graph="DMA50">50 DMA</a></li>
-                            <li><a class="dropdown-item" href="#" data-graph="DMA200">200 DMA</a></li>
-                            <li><a class="dropdown-item" href="#" data-graph="Volume">Volume</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <canvas id="stock-chart" class="chart-canvas p-4" style="max-height: 40vh;"></canvas>
+        <div class="card" style="border-radius: 1rem; width: 100%;">
+            <div class="card-header d-flex justify-content-between align-items-center" style="border-radius: 1rem 1rem 0 0; border-bottom: 0px; background-color: #f8f9fa;">
+                <h5 class="card-title mb-0" style="font-family: 'Arial', sans-serif; font-size: 1.8rem; font-weight: 600; color: #1b0477;">Stock Chart</h5>
+            </div>
+            <div class="card-body">
+                <div style="position: relative; height: 40vh; max-height: 400px;">
+                    <canvas id="stock-chart"></canvas>
                 </div>
             </div>
+        </div>
     </div>
+    
 
     <div class="row justify-content-center mb-3">
         <div class="card shadow border-radius-lg p-0" style="border-radius: 1rem; width: 100%;">
